@@ -16,6 +16,8 @@ import {
     filterWithReduceRight,
     lengthWithReduceLeft,
     lengthWithReduceRight,
+    reverseWithReduceLeft,
+    reverseWithReduceRight
 } from '../src';
 
 const arr = [1, 2, 3, 4, 5];
@@ -159,6 +161,22 @@ describe('functions', () => {
         });
         it('should return a length of 5 for array', () => {
             expect(lengthWithReduceRight(arr)).to.equal(5);
+        });
+    });
+    describe('reverseWithReduceLeft', () => {
+        it('should return an empty array', () => {
+            expect(reverseWithReduceLeft([])).to.deep.equal([]);
+        });
+        it('should return reversed array', () => {
+            expect(reverseWithReduceLeft(arr)).to.deep.equal([5, 4, 3, 2, 1]);
+        });
+    });
+    describe('reverseWithReduceRight', () => {
+        it('should return an empty array', () => {
+            expect(reverseWithReduceRight([])).to.deep.equal([]);
+        });
+        it('should return reversed array', () => {
+            expect(reverseWithReduceRight(arr)).to.deep.equal([5, 4, 3, 2, 1]);
         });
     });
 });

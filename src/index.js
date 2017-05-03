@@ -108,6 +108,14 @@ function lengthWithReduceRight(collection) {
     return reduceRight((_, acc) => acc + 1, 0, collection);
 }
 
+function reverseWithReduceLeft(collection) {
+    return reduce((acc, value) => [value, ...acc], [], collection)
+}
+
+function reverseWithReduceRight(collection) {
+    return reduceRight((value, acc) => acc.concat(value), [], collection)
+}
+
 // console.log('native length', arr.length);
 // console.log('custom lengthWithReduceLeft', lengthWithReduceLeft(arr));
 // console.log('custom lengthWithReduceRight', lengthWithReduceRight(arr));
@@ -145,5 +153,7 @@ export {
     mapWithReduceRight,
     filterWithReduceRight,
     lengthWithReduceLeft,
-    lengthWithReduceRight
+    lengthWithReduceRight,
+    reverseWithReduceLeft,
+    reverseWithReduceRight
 }
