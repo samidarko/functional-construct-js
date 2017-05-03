@@ -1,0 +1,22 @@
+{
+  "name": "functional-constructs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Sami Darko <samidarko@gmail.com> (https://github.com/samidarko)",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src -d dist",
+    "watch": "babel -w src -d dist",
+    "execute": "node dist/index.js",
+    "test": "mocha --compilers js:babel-core/register",
+    "watch:test": "mocha -w --compilers js:babel-core/register"
+  },
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
+    "ramda": "^0.23.0"
+  }
+}
