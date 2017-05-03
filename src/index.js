@@ -1,8 +1,6 @@
 // import R from 'ramda';
 // TODO improve signature like add index and array
 
-const arr = [1, 2, 3, 4, 5];
-
 function assertNotEmpytList(fnName, list) {
     if (list.length === undefined || list.length <= 0) throw new Error(`${fnName}: empty list`);
 }
@@ -40,45 +38,27 @@ function tail(list) {
     return (list.length === 1) ? [] : list.slice(1);
 }
 
-// TODO use tail and head
 function reduce(fn, initial, collection) {
-    const [head, ...tail] = collection;
-    return (head !== undefined) ? reduce(fn, fn(initial, head), tail) : initial;
+    const first = collection[0];
+    return (first !== undefined) ? reduce(fn, fn(initial, first), tail(collection)) : initial;
 }
-
-
-// console.log('native reduce', arr.reduce((acc, value) => acc + value, 0));
-// console.log('custom reduce', reduce((acc, value) => acc + value, 0, arr));
 
 function filter(fn, collection) {
     return reduce((acc, value) => fn(value) ? acc.concat(value) : acc, [], collection);
 }
 
-// console.log('native filter', arr.filter(value => value % 2 === 0));
-// console.log('custom filter', filter(value => value % 2 === 0, arr));
-
 function map(fn, collection) {
     return reduce((acc, value) => acc.concat(fn(value)), [], collection);
 }
-
-// console.log('native map', arr.map(value => value * 2));
-// console.log('custom map', map(value => value * 2, arr));
 
 function forEach(fn, collection) {
     reduce((_, value) => fn(value), undefined, collection);
 }
 
-// console.log('native forEach', arr.forEach(x => console.log(x)));
-// console.log('custom forEach', forEach(x => console.log(x), arr));
-
 function reduceRight(fn, initial, collection) {
     return (collection.length > 0) ?
         reduceRight(fn, fn(last(collection), initial), init(collection)) : initial;
 }
-
-// console.log('native reduceRight', R.reduceRight((value, acc) => value - acc, 0, arr));
-// console.log('custom reduceRight', reduceRight((value, acc) => value - acc, 0, arr));
-
 
 function mapWithReduceRight(fn, collection) {
     function step(x, ys) {
@@ -88,8 +68,6 @@ function mapWithReduceRight(fn, collection) {
     return reduceRight(step, [], collection);
 }
 
-// console.log('custom mapWithReduceRight', mapWithReduceRight(value => value * 2, arr));
-
 function filterWithReduceRight(fn, collection) {
     function step(x, ys) {
         return fn(x) ? [x, ...ys] : ys;
@@ -97,8 +75,6 @@ function filterWithReduceRight(fn, collection) {
 
     return reduceRight(step, [], collection);
 }
-
-// console.log('custom filterWithReduceRight', filterWithReduceRight(value => value % 2 === 0, arr));
 
 function lengthWithReduceLeft(collection) {
     return reduce((acc, _) => acc + 1, 0, collection);
@@ -116,10 +92,6 @@ function reverseWithReduceRight(collection) {
     return reduceRight((value, acc) => acc.concat(value), [], collection)
 }
 
-// console.log('native length', arr.length);
-// console.log('custom lengthWithReduceLeft', lengthWithReduceLeft(arr));
-// console.log('custom lengthWithReduceRight', lengthWithReduceRight(arr));
-
 // function reduceLeftWithReduceRight(fn, initial, collection) {
 //     function step(x, ys) {
 //         return [fn(x), ...ys];
@@ -131,12 +103,9 @@ function reverseWithReduceRight(collection) {
 // myFoldl f initial collection = foldr step id collection initial
 // where step x g a = g (f a x)
 
-
-// console.log('custom reduceLeftWithReduceRight', reduceLeftWithReduceRight((acc, value) => acc + value, 0, arr));
-
 // reduceRightWithReduceLeft ?
-// reverseWithFoldLeft
-// reverseWithFoldRight
+
+// TODO review reduceRight signature as reduceRight(function(previousValue, currentValue, index, array)
 
 export {
     assertNotEmpytList,
