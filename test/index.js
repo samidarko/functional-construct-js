@@ -125,10 +125,10 @@ describe('functions', () => {
     });
     describe('reduceRight', () => {
         it('should return 0 if empty array', () => {
-            expect(reduceRight((value, acc) => value - acc, 0, [])).to.equal(0);
+            expect(reduceRight((previous, current) => previous - current, 0, [])).to.equal(0);
         });
-        it('should return 15', () => {
-            expect(reduceRight((value, acc) => value - acc, 0, arr)).to.equal(3);
+        it('should return -15', () => {
+            expect(reduceRight((previous, current) => previous - current, 0, arr)).to.equal(-15);
         });
     });
     describe('filterWithReduceRight', () => {

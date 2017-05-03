@@ -57,20 +57,20 @@ function forEach(fn, collection) {
 
 function reduceRight(fn, initial, collection) {
     return (collection.length > 0) ?
-        reduceRight(fn, fn(last(collection), initial), init(collection)) : initial;
+        reduceRight(fn, fn(initial, last(collection)), init(collection)) : initial;
 }
 
 function mapWithReduceRight(fn, collection) {
-    function step(x, ys) {
-        return [fn(x), ...ys];
+    function step(xs, x) {
+        return [fn(x), ...xs];
     }
 
     return reduceRight(step, [], collection);
 }
 
 function filterWithReduceRight(fn, collection) {
-    function step(x, ys) {
-        return fn(x) ? [x, ...ys] : ys;
+    function step(xs, x) {
+        return fn(x) ? [x, ...xs] : xs;
     }
 
     return reduceRight(step, [], collection);
@@ -81,7 +81,7 @@ function lengthWithReduceLeft(collection) {
 }
 
 function lengthWithReduceRight(collection) {
-    return reduceRight((_, acc) => acc + 1, 0, collection);
+    return reduceRight((xs, _) => xs + 1, 0, collection);
 }
 
 function reverseWithReduceLeft(collection) {
@@ -89,7 +89,7 @@ function reverseWithReduceLeft(collection) {
 }
 
 function reverseWithReduceRight(collection) {
-    return reduceRight((value, acc) => acc.concat(value), [], collection)
+    return reduceRight((previous, current) => previous.concat(current), [], collection)
 }
 
 // function reduceLeftWithReduceRight(fn, initial, collection) {
