@@ -17,7 +17,11 @@ import {
     lengthWithReduceLeft,
     lengthWithReduceRight,
     reverseWithReduceLeft,
-    reverseWithReduceRight
+    reverseWithReduceRight,
+    maxWithReduceLeft,
+    maxWithReduceRight,
+    minWithReduceLeft,
+    minWithReduceRight
 } from '../src';
 
 const arr = [1, 2, 3, 4, 5];
@@ -177,6 +181,42 @@ describe('functions', () => {
         });
         it('should return reversed array', () => {
             expect(reverseWithReduceRight(arr)).to.deep.equal([5, 4, 3, 2, 1]);
+        });
+    });
+    describe('maxWithReduceLeft', () => {
+        it('should throw an error if empty array', () => {
+            const fnName = 'maxWithReduceLeft';
+            expect(() => maxWithReduceLeft([])).to.throw(Error, `${fnName}: empty list`);
+        });
+        it('should return the max', () => {
+            expect(maxWithReduceLeft(arr)).to.equal(5);
+        });
+    });
+    describe('maxWithReduceRight', () => {
+        it('should throw an error if empty array', () => {
+            const fnName = 'maxWithReduceRight';
+            expect(() => maxWithReduceRight([])).to.throw(Error, `${fnName}: empty list`);
+        });
+        it('should return the max', () => {
+            expect(maxWithReduceRight(arr)).to.equal(5);
+        });
+    });
+    describe('minWithReduceLeft', () => {
+        it('should throw an error if empty array', () => {
+            const fnName = 'minWithReduceLeft';
+            expect(() => minWithReduceLeft([])).to.throw(Error, `${fnName}: empty list`);
+        });
+        it('should return the min', () => {
+            expect(minWithReduceLeft(arr)).to.equal(1);
+        });
+    });
+    describe('minWithReduceRight', () => {
+        it('should throw an error if empty array', () => {
+            const fnName = 'minWithReduceRight';
+            expect(() => minWithReduceRight([])).to.throw(Error, `${fnName}: empty list`);
+        });
+        it('should return the min', () => {
+            expect(minWithReduceRight(arr)).to.equal(1);
         });
     });
 });

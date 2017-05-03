@@ -92,6 +92,26 @@ function reverseWithReduceRight(collection) {
     return reduceRight((previous, current) => previous.concat(current), [], collection)
 }
 
+function maxWithReduceLeft(collection) {
+    assertNotEmpytList('maxWithReduceLeft', collection);
+    return reduce((acc, value) => value > acc ? value : acc, Number.NEGATIVE_INFINITY, collection)
+}
+
+function maxWithReduceRight(collection) {
+    assertNotEmpytList('maxWithReduceRight', collection);
+    return reduceRight((acc, value) => value > acc ? value : acc, Number.NEGATIVE_INFINITY, collection)
+}
+
+function minWithReduceLeft(collection) {
+    assertNotEmpytList('minWithReduceLeft', collection);
+    return reduce((acc, value) => value < acc ? value : acc, Number.POSITIVE_INFINITY, collection)
+}
+
+function minWithReduceRight(collection) {
+    assertNotEmpytList('minWithReduceRight', collection);
+    return reduceRight((acc, value) => value < acc ? value : acc, Number.POSITIVE_INFINITY, collection)
+}
+
 // function reduceLeftWithReduceRight(fn, initial, collection) {
 //     function step(x, ys) {
 //         return [fn(x), ...ys];
@@ -124,5 +144,9 @@ export {
     lengthWithReduceLeft,
     lengthWithReduceRight,
     reverseWithReduceLeft,
-    reverseWithReduceRight
+    reverseWithReduceRight,
+    minWithReduceLeft,
+    minWithReduceRight,
+    maxWithReduceLeft,
+    maxWithReduceRight
 }
